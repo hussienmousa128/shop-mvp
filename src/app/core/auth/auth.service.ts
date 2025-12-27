@@ -11,7 +11,12 @@ export class AuthService {
   logout():void {
     localStorage.removeItem(this.ACCESS_TOKEN_KEY);
   }
-  getAccessToken():string | null {
-    return localStorage.getItem(this.ACCESS_TOKEN_KEY);
+
+  get accessToken():string | null {
+    return localStorage.getItem(this.ACCESS_TOKEN_KEY);}
+
+  isLoggedIn(): boolean{
+    if(this.accessToken) return true;
+    return false;
   }
 }
