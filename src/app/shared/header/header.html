@@ -6,7 +6,8 @@
       <a class="cursor-pointer select-none text-gray-700 hover:text-black" routerLink="/">Home</a>
       <a class="cursor-pointer select-none text-gray-700 hover:text-black" routerLink="/products">Products</a>
       <a class="cursor-pointer select-none text-gray-700 hover:text-black" routerLink="/cart">Cart</a>
-      <a class="cursor-pointer select-none rounded-md border px-3 py-1 text-gray-700 hover:text-black" routerLink="/login">Login</a>
+      <a *ngIf="!isLoggedIn" class="cursor-pointer select-none rounded-md border px-3 py-1 text-gray-700 hover:text-black" routerLink="/login">Login</a>
+      <button *ngIf="isLoggedIn" (click)="logout()" class="cursor-pointer select-none rounded-md border px-3 py-1 text-gray-700 hover:text-black">Logout</button>
     </nav>
   </div>
 </header>
