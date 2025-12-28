@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/auth/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +15,7 @@ export class Login {
 submitted = false;
 auth = inject(AuthService);
 router = inject(Router)
+route = inject(ActivatedRoute);
 fb = inject(FormBuilder);
 form = this.fb.group({
   email : ['', [Validators.required, Validators.email]],
@@ -30,5 +31,6 @@ if(this.form.invalid){
   return;
 }
 this.auth.login(this.email, this.password);
-this.router.navigate(['/'])
+const returnUrl = this.route.snapshot.queryParamMap.get('returnurl') ?? '/';
+this.router.navigateByUrl(returnUrl);
 }}
